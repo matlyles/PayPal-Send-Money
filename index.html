@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Smooth Scroll</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
+
+<body id="top">
+	<section class="container">
+	<nav class="header">
+		
+		<ul class="header-nav">
+			<li><a href="#">Summary</a></li>
+			<li><a href="#">Activity</a></li>
+			<li><a href="#">Send & Request<span class="current"></span></a></li>
+			<li><a href="#">Wallet</a></li>
+			<li><a href="#">Shop</a></li>
+		</ul>
+		<ul class="header-actions">
+			<li><a href="#">Log out</a></li>
+		</ul>
+	</nav>
+
+	<section class="content">
+		
+		<div class="search-container">
+		<h1>Send money to friends and family</h1>
+		You can send money to almost anyone, even if they don’t have a PayPal account.
+		<input class="search" type="text" placeholder="Email or mobile number"></input>
+		</div>
+			<div class="user-thumbs">
+				<div class="user-thumb" data-name="Vivek"><div class="thumb-inner"><img src="img/user.png"></div></div>
+				<div class="user-thumb" data-name="Michelle"><div class="thumb-inner"><img src="img/user2.jpg"></div></div>
+				<div class="user-thumb" data-name="Megan"><div class="thumb-inner"><img src="img/user3.jpg"></div></div>
+				<div class="user-thumb" data-name="Micheal"><div class="thumb-inner"><img src="img/user4.jpg"></div></div>
+				<div class="user-thumb" data-name="Ross"><div class="thumb-inner"><img src="img/user5.jpg"></div></div>
+			</div>
+
+		<div class="add-money-container">
+		<h3 class="user-name"></h3>
+			<input id="money" class="money" type="text" placeholder="$0.00"></input>
+			<!-- <input class="currency" type="text" placeholder="USD"></input> -->
+		<div class="currencies">USD</div>
+		</div>
+		
+
+	</section>
+  </section> <!-- end container -->
+
+
+	<!-- Javascript -->
+	<script type="text/javascript" src='http://code.jquery.com/jquery-latest.min.js'></script>
+	<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function () {
+		
+		var recipent = document.getElementsByClassName('user-thumb'),
+			userName = document.getElementsByClassName('user-name')[0],
+			searchBox = document.getElementsByClassName('search-container')[0],
+    		triggerEvent = 'click'; // click or touchend
+
+    	for (var i = 0; i < recipent.length; i++) {
+    		recipent[i].addEventListener(triggerEvent, function (e) {
+
+	    		var cur = this;
+					
+				userName.innerHTML = 'Send ' + cur.getAttribute("data-name");
+				searchBox.className = 'search-container move-search';
+
+				cur.className = 'user-thumb move-thumb';
+				$(recipent).addClass('zero').not(cur).css({'opacity':0});
+			 	document.querySelector('.add-money-container').className = 'add-money-container move-money';
+				  
+			   	setTimeout(function () {
+      	 			$('.user-thumb').not(cur).hide();
+      	 		},1000);
+ 			 
+			}); // end triggerEvent
+		}
+
+
+	});	// end doc ready //
+	</script> 
+
+</body>
+</html>
